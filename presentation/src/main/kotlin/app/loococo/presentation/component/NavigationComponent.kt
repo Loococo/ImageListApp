@@ -14,7 +14,6 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import app.loococo.presentation.theme.Black
@@ -22,18 +21,18 @@ import app.loococo.presentation.theme.White
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ImageListTopBar(text: Int) {
+fun ImageListTopBar(text: String) {
     TopAppBar(
         modifier = Modifier,
         title = {
             ImageListTitleText(
-                text = stringResource(text),
+                text = text,
                 color = White
             )
         },
         expandedHeight = 60.dp,
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-            containerColor = Color.Black
+            containerColor = Black
         )
     )
 }

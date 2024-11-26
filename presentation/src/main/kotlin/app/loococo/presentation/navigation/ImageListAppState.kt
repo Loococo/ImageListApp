@@ -2,7 +2,11 @@ package app.loococo.presentation.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.util.trace
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hasRoute
@@ -29,6 +33,8 @@ fun rememberImageListAppState(
 
 @Stable
 class ImageListAppState(val navController: NavHostController) {
+    var currentTitle: String by mutableStateOf("")
+        private set
 
     val currentDestination: NavDestination?
         @Composable get() = navController
@@ -36,12 +42,28 @@ class ImageListAppState(val navController: NavHostController) {
 
     val topLevelDestinations: List<TopLevelDestination> = TopLevelDestination.entries
 
-    val currentTopLevelDestination: TopLevelDestination?
+    private val currentTopLevelDestination: TopLevelDestination?
         @Composable get() {
             return TopLevelDestination.entries.firstOrNull { topLevelDestination ->
                 currentDestination?.hasRoute(route = topLevelDestination.route) ?: false
             }
         }
+
+    fun updateTitle(newTitle: String) {
+        currentTitle = newTitle
+    }
+
+    @Composable
+    fun updateTitleFromTopLevelDestination() {
+        currentTopLevelDestination?.let { destination ->
+            currentTitle = when (destination) {
+                TopLevelDestination.HOME ->
+                    currentTitle.ifBlank { stringResource(destination.titleTextId) }
+
+                else -> stringResource(destination.titleTextId)
+            }
+        }
+    }
 
     fun navigateToTopLevelDestination(topLevelDestination: TopLevelDestination) {
         trace("Navigation: ${topLevelDestination.name}") {

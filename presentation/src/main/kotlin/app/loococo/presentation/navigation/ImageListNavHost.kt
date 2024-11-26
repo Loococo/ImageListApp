@@ -14,7 +14,9 @@ fun ImageListNavHost(appState: ImageListAppState) {
         navController = navController,
         startDestination = AppRoute.Home
     ) {
-        homeScreen()
+        homeScreen(
+            onHomeTitle = appState::updateTitle
+        )
         favoriteScreen()
     }
 }

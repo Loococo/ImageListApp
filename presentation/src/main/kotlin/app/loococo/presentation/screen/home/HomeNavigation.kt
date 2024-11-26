@@ -6,9 +6,9 @@ import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import app.loococo.presentation.screen.AppRoute
 
-fun NavGraphBuilder.homeScreen() {
+fun NavGraphBuilder.homeScreen(onHomeTitle: (String) -> Unit) {
     composable<AppRoute.Home> {
-        HomeRoute()
+        HomeRoute(onHomeTitle)
     }
 }
 

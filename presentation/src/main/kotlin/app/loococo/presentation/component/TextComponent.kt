@@ -7,28 +7,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.sp
 import app.loococo.presentation.theme.Black
-
-@Composable
-fun ImageListLabelText(
-    text: String,
-    modifier: Modifier = Modifier,
-    fontWeight: FontWeight = FontWeight.Normal,
-    textDecoration: TextDecoration = TextDecoration.None,
-    textAlign: TextAlign = TextAlign.Center,
-    color: Color = Black
-) {
-    Text(
-        text = text,
-        modifier = modifier,
-        fontSize = 12.sp,
-        fontWeight = fontWeight,
-        textAlign = textAlign,
-        textDecoration = textDecoration,
-        color = color
-    )
-}
 
 @Composable
 fun ImageListBodyText(
@@ -36,8 +17,8 @@ fun ImageListBodyText(
     modifier: Modifier = Modifier,
     fontWeight: FontWeight = FontWeight.Normal,
     textDecoration: TextDecoration = TextDecoration.None,
-    textAlign: TextAlign = TextAlign.Center,
-    color: Color = Black
+    textAlign: TextAlign = TextAlign.Start,
+    color: Color = Black,
 ) {
     Text(
         text = text,
@@ -56,7 +37,7 @@ fun ImageListTitleText(
     modifier: Modifier = Modifier,
     fontWeight: FontWeight = FontWeight.Normal,
     textDecoration: TextDecoration = TextDecoration.None,
-    textAlign: TextAlign = TextAlign.Center,
+    textAlign: TextAlign = TextAlign.Start,
     color: Color = Black
 ) {
     Text(
@@ -71,42 +52,23 @@ fun ImageListTitleText(
 }
 
 @Composable
-fun ImageListHeadlineText(
+fun ImageListTitleEllipsisText(
     text: String,
     modifier: Modifier = Modifier,
     fontWeight: FontWeight = FontWeight.Normal,
     textDecoration: TextDecoration = TextDecoration.None,
-    textAlign: TextAlign = TextAlign.Center,
+    textAlign: TextAlign = TextAlign.Start,
     color: Color = Black
 ) {
     Text(
         text = text,
         modifier = modifier,
-        fontSize = 24.sp,
+        fontSize = 20.sp,
         fontWeight = fontWeight,
         textAlign = textAlign,
         textDecoration = textDecoration,
-        color = color
-    )
-}
-
-
-@Composable
-fun ImageListDisplayText(
-    text: String,
-    modifier: Modifier = Modifier,
-    fontWeight: FontWeight = FontWeight.Normal,
-    textDecoration: TextDecoration = TextDecoration.None,
-    textAlign: TextAlign = TextAlign.Center,
-    color: Color = Black
-) {
-    Text(
-        text = text,
-        modifier = modifier,
-        fontSize = 28.sp,
-        fontWeight = fontWeight,
-        textAlign = textAlign,
-        textDecoration = textDecoration,
-        color = color
+        color = color,
+        maxLines = 2,
+        overflow = TextOverflow.Ellipsis
     )
 }

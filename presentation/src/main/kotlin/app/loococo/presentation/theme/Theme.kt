@@ -7,7 +7,7 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 
 private val LightColorPalette = lightColorScheme(
-    background = White
+    background = Black
 )
 
 private val DarkColorPalette = darkColorScheme(
