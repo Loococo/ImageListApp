@@ -11,6 +11,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import app.loococo.presentation.theme.Black
 import app.loococo.presentation.theme.Orange
+import app.loococo.presentation.theme.White
 import app.loococo.presentation.utils.ImageListIcons
 
 @Composable
@@ -21,10 +22,8 @@ fun ImageListIconButton(
     color: Color = Black,
     onClick: () -> Unit
 ) {
-    IconButton(
-        modifier = Modifier.size(size),
-        onClick = onClick
-    ) {
+
+    IconButton(onClick = onClick) {
         Icon(
             imageVector = icon,
             contentDescription = description,
@@ -43,7 +42,7 @@ fun ImageListIconButton(
         size = 35.dp,
         icon = if (selected) ImageListIcons.Favorite else ImageListIcons.FavoriteBorder,
         description = "imageListIconButton",
-        color = Orange,
+        color = if (selected) Orange else White,
         onClick = onClick
     )
 }

@@ -2,13 +2,15 @@ package app.loococo.data.local.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import app.loococo.data.local.model.StoreEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface StoreDao {
-    @Insert
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(storeEntity: StoreEntity)
 
     @Query("SELECT * FROM store ORDER BY name ASC")
