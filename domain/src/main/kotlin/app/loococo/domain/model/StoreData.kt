@@ -6,6 +6,7 @@ data class StoreData(
 )
 
 data class StoreItem(
+    val id: Long = 0,
     val code: String,
     val thumbnailUrl: String,
     val iconImageUrl: String,

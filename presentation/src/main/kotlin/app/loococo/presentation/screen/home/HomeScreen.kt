@@ -1,9 +1,14 @@
 package app.loococo.presentation.screen.home
 
 import android.widget.Toast
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -72,12 +77,22 @@ fun HomeList(
     stores: List<StoreItem>,
     onEventSent: (HomeEvent) -> Unit
 ) {
-    LazyColumn(modifier = Modifier.fillMaxSize()) {
-        items(stores) {
-            HomeListItem(
-                storeItem = it,
-                onEventSent = onEventSent
-            )
+    AnimatedVisibility(
+        visible = stores.isNotEmpty(),
+        enter = fadeIn(),
+        exit = fadeOut()
+    ) {
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(20.dp),
+            verticalArrangement = Arrangement.spacedBy(20.dp)
+        ) {
+            items(stores) {
+                HomeListItem(
+                    storeItem = it,
+                    onEventSent = onEventSent
+                )
+            }
         }
     }
 }
@@ -89,26 +104,21 @@ fun HomeListItem(
 ) {
     if (storeItem.code.isBlank()) return
 
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(20.dp, 15.dp)
-    ) {
+    Column(modifier = Modifier.fillMaxWidth()) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(4 / 3f)
                 .background(White)
         ) {
-            ImageListAsyncImage(storeItem.iconImageUrl)
+            ImageListAsyncImage(storeItem.thumbnailUrl)
             Box(modifier = Modifier.padding(15.dp)) {
                 ImageListAsyncCircleImage(
                     modifier = Modifier.size(50.dp),
-                    image = storeItem.thumbnailUrl
+                    image = storeItem.iconImageUrl
                 )
             }
         }
-
         HeightSpacer(10)
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -122,7 +132,8 @@ fun HomeListItem(
             WidthSpacer(5)
             ImageListIconButton(
                 selected = storeItem.selected,
-                onClick = { onEventSent(HomeEvent.OnFavoriteClicked(storeItem)) })
+                onClick = { onEventSent(HomeEvent.OnFavoriteClicked(storeItem)) }
+            )
         }
     }
 }

@@ -18,8 +18,8 @@ fun ImageListApp(appState: ImageListAppState = rememberImageListAppState()) {
     ImageListTheme {
         Scaffold(
             topBar = {
-                appState.updateTitleFromTopLevelDestination()
-                ImageListTopBar(text = appState.currentTitle)
+                val title = appState.updateTitleFromTopLevelDestination()
+                ImageListTopBar(text = title)
             },
             bottomBar = {
                 ImageListBottomBar {

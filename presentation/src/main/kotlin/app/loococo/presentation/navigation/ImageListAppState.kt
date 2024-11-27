@@ -33,8 +33,7 @@ fun rememberImageListAppState(
 
 @Stable
 class ImageListAppState(val navController: NavHostController) {
-    var currentTitle: String by mutableStateOf("")
-        private set
+    private var currentTitle: String by mutableStateOf("")
 
     val currentDestination: NavDestination?
         @Composable get() = navController
@@ -54,15 +53,16 @@ class ImageListAppState(val navController: NavHostController) {
     }
 
     @Composable
-    fun updateTitleFromTopLevelDestination() {
+    fun updateTitleFromTopLevelDestination(): String {
         currentTopLevelDestination?.let { destination ->
-            currentTitle = when (destination) {
+            return when (destination) {
                 TopLevelDestination.HOME ->
                     currentTitle.ifBlank { stringResource(destination.titleTextId) }
 
-                else -> stringResource(destination.titleTextId)
+                TopLevelDestination.Favorite -> stringResource(destination.titleTextId)
             }
         }
+        return ""
     }
 
     fun navigateToTopLevelDestination(topLevelDestination: TopLevelDestination) {

@@ -1,6 +1,8 @@
 package app.loococo.imagelistapp.di
 
+import app.loococo.domain.repository.FavoriteRepository
 import app.loococo.domain.repository.StoreRepository
+import app.loococo.domain.usecase.FavoriteUseCase
 import app.loococo.domain.usecase.StoreUseCase
 import dagger.Module
 import dagger.Provides
@@ -15,5 +17,9 @@ object UseCaseModule {
     @Provides
     @Singleton
     fun provideStoreUseCase(repository: StoreRepository): StoreUseCase = StoreUseCase(repository)
+
+    @Provides
+    @Singleton
+    fun provideFavoriteUseCase(repository: FavoriteRepository): FavoriteUseCase = FavoriteUseCase(repository)
 
 }

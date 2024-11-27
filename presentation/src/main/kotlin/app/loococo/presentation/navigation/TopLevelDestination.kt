@@ -16,7 +16,7 @@ enum class TopLevelDestination(
         route = AppRoute.Home::class
     ),
     Favorite(
-        titleTextId = R.string.home,
+        titleTextId = R.string.favorite,
         contentTextId = R.string.favorite,
         route = AppRoute.Favorite::class
     )
