@@ -8,9 +8,6 @@ import app.loococo.domain.usecase.StoreUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
 import org.orbitmvi.orbit.ContainerHost
-import org.orbitmvi.orbit.syntax.simple.intent
-import org.orbitmvi.orbit.syntax.simple.postSideEffect
-import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
 import javax.inject.Inject
 
@@ -20,11 +17,7 @@ class HomeViewModel @Inject constructor(
     private val favoriteUseCase: FavoriteUseCase
 ) : ContainerHost<HomeState, HomeSideEffect>, ViewModel() {
 
-    override val container = container<HomeState, HomeSideEffect>(HomeState())
-
-    init {
-        loadStoreData()
-    }
+    override val container = container<HomeState, HomeSideEffect>(HomeState()) { loadStoreData() }
 
     fun onEventReceived(event: HomeEvent) {
         when (event) {

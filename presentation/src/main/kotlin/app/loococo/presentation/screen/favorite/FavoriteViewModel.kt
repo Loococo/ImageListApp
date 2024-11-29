@@ -6,8 +6,6 @@ import app.loococo.domain.usecase.FavoriteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
 import org.orbitmvi.orbit.ContainerHost
-import org.orbitmvi.orbit.syntax.simple.intent
-import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
 import javax.inject.Inject
 
@@ -16,11 +14,8 @@ class FavoriteViewModel @Inject constructor(
     private val favoriteUseCase: FavoriteUseCase
 ) : ContainerHost<FavoriteState, FavoriteSideEffect>, ViewModel() {
 
-    override val container = container<FavoriteState, FavoriteSideEffect>(FavoriteState())
-
-    init {
-        loadStoreData()
-    }
+    override val container =
+        container<FavoriteState, FavoriteSideEffect>(FavoriteState()) { loadStoreData() }
 
     fun onEventReceived(event: FavoriteEvent) {
         when (event) {
