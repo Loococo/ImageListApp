@@ -16,5 +16,6 @@
 - Mockito
 
 ## API 사용 방법
-`local.properties`에 API_BASE_URL에 도메인 추가 후 사용
-ex) `https://test.test/`
+`local.properties`에 API_BASE_URL를 만들고 도메인 추가 후 사용
+
+ex) `API_BASE_URL = https://test.test/`
